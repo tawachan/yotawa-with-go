@@ -95,7 +95,6 @@ type (
 	HTTPError struct {
 		Code    int
 		Message interface{}
-		Inner   error // Stores the error returned by an external dependency
 	}
 
 	// MiddlewareFunc defines a function to process middleware.
@@ -213,7 +212,7 @@ const (
 )
 
 const (
-	version = "3.2.3"
+	version = "3.2.1"
 	website = "https://echo.labstack.com"
 	// http://patorjk.com/software/taag/#p=display&f=Small%20Slant&t=Echo
 	banner = `
@@ -320,9 +319,6 @@ func (e *Echo) DefaultHTTPErrorHandler(err error, c Context) {
 	if he, ok := err.(*HTTPError); ok {
 		code = he.Code
 		msg = he.Message
-		if he.Inner != nil {
-			msg = fmt.Sprintf("%v, %v", err, he.Inner)
-		}
 	} else if e.Debug {
 		msg = err.Error()
 	} else {
@@ -332,19 +328,19 @@ func (e *Echo) DefaultHTTPErrorHandler(err error, c Context) {
 		msg = Map{"message": msg}
 	}
 
-	e.Logger.Error(err)
-
-	// Send response
 	if !c.Response().Committed {
 		if c.Request().Method == HEAD { // Issue #608
-			err = c.NoContent(code)
+			if err := c.NoContent(code); err != nil {
+				goto ERROR
+			}
 		} else {
-			err = c.JSON(code, msg)
-		}
-		if err != nil {
-			e.Logger.Error(err)
+			if err := c.JSON(code, msg); err != nil {
+				goto ERROR
+			}
 		}
 	}
+ERROR:
+	e.Logger.Error(err)
 }
 
 // Pre adds middleware to the chain which is run before router.
