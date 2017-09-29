@@ -1,4 +1,4 @@
-package: .
+package: github.com/yusuke9929/yotawa-with-go
 import:
 - package: github.com/labstack/echo
   version: ~3.2.3
