@@ -1,28 +1,13 @@
-hash: 1842d555a0fa5b780a2bb20b401cfc1eee24f1521a848e64ecda58585e518f3c
-updated: 2017-09-29T18:39:47.206967395+09:00
+hash: 909eb65db194dcabe5360107293e3dfceae7cf83a0f70396860c2d73693e3c49
+updated: 2017-09-29T19:22:45.569106427+09:00
 imports:
-- name: github.com/labstack/echo
-  version: cec7629194fe4bf83b0c72d9a02d340c7a1468ac
-- name: github.com/labstack/gommon
-  version: 57409ada9da0f2afad6664c49502f8c50fbd8476
+- name: github.com/line/line-bot-sdk-go
+  version: 3a7d66f5efce6ac202f650134609f9d6d163a640
   subpackages:
-  - color
-  - log
-- name: github.com/mattn/go-colorable
-  version: ad5389df28cdac544c99bd7b9161a0b5b6ca9d1b
-- name: github.com/mattn/go-isatty
-  version: a5cdd64afdee435007ee3e9f6ed4684af949d568
-- name: github.com/valyala/bytebufferpool
-  version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
-- name: github.com/valyala/fasttemplate
-  version: dcecefd839c4193db0d35b88ec65b4c12d360ab0
-- name: golang.org/x/crypto
-  version: 76eec36fa14229c4b25bb894c2d0e591527af429
+  - linebot
+- name: golang.org/x/net
+  version: 0a9397675ba34b2845f758fe3cd68828369c6517
   subpackages:
-  - acme
-  - acme/autocert
-- name: golang.org/x/sys
-  version: 314a259e304ff91bd6985da2a7149bbf91237993
-  subpackages:
-  - unix
+  - context
+  - context/ctxhttp
 testImports: []
