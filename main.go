@@ -58,6 +58,10 @@ func callback(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 
+		if len(replyTexts) {
+			replyTexts = append(replyTexts, message.Text)
+		}
+
 		// Set line structs, using slices set up above
 		for _, m := range replyTexts {
 			replyMessages = append(replyMessages, linebot.NewTextMessage(m))
