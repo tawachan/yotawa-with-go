@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -51,9 +50,8 @@ func callback(w http.ResponseWriter, req *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if strings.Contains(message.Text, "おおたわ") {
-					replyMessages = append(replyMessages, "otawa")
-				}
+				replyMessages = getAutoResponses(message.Text)
+
 			case *linebot.ImageMessage:
 				replyMessages = append(replyMessages, "image included")
 			}
