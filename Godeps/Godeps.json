@@ -1,5 +1,5 @@
 {
-	"ImportPath": ".",
+	"ImportPath": "github.com/yusuke9929/yotawa-with-go",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79"
 }
