@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/labstack/echo"
 )
 
 func main() {
@@ -13,8 +15,11 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":"+port, nil)
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
