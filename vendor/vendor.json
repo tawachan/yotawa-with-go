@@ -2,6 +2,6 @@
   "rootPath": "github.com/yusuke9929/yotawa-with-go",
   "heroku": {
     "install" : [ "./..." ],
-    "goVersion": "go1.6"
+    "goVersion": "go1.9"
   }
 }
