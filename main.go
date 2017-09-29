@@ -44,24 +44,30 @@ func callback(w http.ResponseWriter, req *http.Request) {
 		}
 		return
 	}
-
+	// Set up slices for reply
 	for _, event := range events {
-		var replyMessages []string
+		var replyTexts []string
+		var replyMessages []linebot.Message
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				replyMessages = getAutoResponses(message.Text)
+				replyTexts = getAutoResponses(message.Text)
 
 			case *linebot.ImageMessage:
-				replyMessages = append(replyMessages, "image included")
+				replyTexts = append(replyTexts, "image included")
 			}
 		}
 
-		for _, m := range replyMessages {
-			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(m)).Do(); err != nil {
-				log.Print(err)
-			}
+		// Set line structs, using slices set up above
+		for _, m := range replyTexts {
+			replyMessages = append(replyMessages, linebot.NewTextMessage(m))
 		}
+
+		// execute message-reply
+		if _, err = bot.ReplyMessage(event.ReplyToken, replyMessages...).Do(); err != nil {
+			log.Print(err)
+		}
+
 	}
 }
 
