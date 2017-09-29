@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -23,13 +24,13 @@ func main() {
 }
 
 func root(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "test")
+	io.WriteString(w, "Your App is now runninng !!!")
 }
 
 func callback(w http.ResponseWriter, req *http.Request) {
 	channelSecret := os.Getenv("channelSecret")
 	channelAccessToken := os.Getenv("channelAccessToken")
-	io.WriteString(w, "callback")
+
 	bot, err := linebot.New(channelSecret, channelAccessToken)
 	checkError(err)
 
@@ -44,17 +45,26 @@ func callback(w http.ResponseWriter, req *http.Request) {
 		}
 		return
 	}
+
 	for _, event := range events {
+		var replyMessages []string
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-					log.Print(err)
+				if strings.Contains(message.Text, "おおたわ") {
+					replyMessages = append(replyMessages, "otawa")
 				}
+			case *linebot.ImageMessage:
+				replyMessages = append(replyMessages, "image included")
+			}
+		}
+
+		for _, m := range replyMessages {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(m)).Do(); err != nil {
+				log.Print(err)
 			}
 		}
 	}
-
 }
 
 func checkError(err error) {
