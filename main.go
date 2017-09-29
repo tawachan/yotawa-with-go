@@ -52,14 +52,13 @@ func callback(w http.ResponseWriter, req *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				replyTexts = getAutoResponses(message.Text)
+				if len(replyTexts) == 0 {
+					replyTexts = append(replyTexts, message.Text)
+				}
 
 			case *linebot.ImageMessage:
 				replyTexts = append(replyTexts, "image included")
 			}
-		}
-
-		if len(replyTexts) {
-			replyTexts = append(replyTexts, message.Text)
 		}
 
 		// Set line structs, using slices set up above
