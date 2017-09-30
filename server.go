@@ -36,18 +36,17 @@ func callback(w http.ResponseWriter, req *http.Request) {
 
 	// Set up slices for reply
 	for _, event := range events {
-		var replyContents []linebot.Message
+		var MessagesToReply []linebot.Message
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				replyContents = getReplyContents(message.Text)
+				MessagesToReply = getMessagesToText(message.Text)
 			case *linebot.ImageMessage:
-				replyContents = convertToLineFormat([]content{content{"text", "image detected"}})
+				MessagesToReply = getMessagesToImage()
 			}
 		}
-
 		// execute message-reply
-		if _, err = bot.ReplyMessage(event.ReplyToken, replyContents...).Do(); err != nil {
+		if _, err = bot.ReplyMessage(event.ReplyToken, MessagesToReply...).Do(); err != nil {
 			log.Print(err)
 		}
 
