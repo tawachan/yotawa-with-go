@@ -28,7 +28,7 @@ func getReplyContents(t string) (replyContents []linebot.Message) {
 	var contents []content
 	contents = getAutoResponses(t)
 	if len(contents) == 0 {
-		contents = append(contents, content{"text", t})
+		contents = append(contents, content{"link", t})
 	}
 	replyContents = convertToLineFormat(contents)
 	return
@@ -42,6 +42,16 @@ func convertToLineFormat(contents []content) (replyContents []linebot.Message) {
 			rc = linebot.NewTextMessage(c.Content)
 		} else if c.Ctype == "image" {
 			rc = linebot.NewImageMessage(c.Content, c.Content)
+		} else if c.Ctype == "link" {
+			clicked := linebot.NewMessageTemplateAction("View", "More")
+			card := linebot.NewCarouselColumn(
+				"https://yotawa9929.tumblr.com/",
+				"Tumblr",
+				"みてね!",
+				clicked,
+			)
+			template := linebot.NewCarouselTemplate(card)
+			rc = linebot.NewTemplateMessage("Check this out!", template)
 		} else {
 			continue
 		}
