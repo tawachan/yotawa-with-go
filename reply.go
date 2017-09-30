@@ -24,19 +24,12 @@ func init() {
 	}
 }
 
-func getReplyContents(event *linebot.Event) (replyContents []linebot.Message) {
+func getReplyContents(t string) (replyContents []linebot.Message) {
 	var contents []content
-	switch message := event.Message.(type) {
-	case *linebot.TextMessage:
-		contents = getAutoResponses(message.Text)
-		if len(contents) == 0 {
-			contents = append(contents, content{"text", message.Text})
-		}
-
-	case *linebot.ImageMessage:
-		contents = append(contents, content{"text", "image detected"})
+	contents = getAutoResponses(t)
+	if len(contents) == 0 {
+		contents = append(contents, content{"text", t})
 	}
-
 	replyContents = convertToLineFormat(contents)
 	return
 }

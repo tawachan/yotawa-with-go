@@ -38,7 +38,12 @@ func callback(w http.ResponseWriter, req *http.Request) {
 	for _, event := range events {
 		var replyContents []linebot.Message
 		if event.Type == linebot.EventTypeMessage {
-			replyContents = getReplyContents(event)
+			switch message := event.Message.(type) {
+			case *linebot.TextMessage:
+				replyContents = getReplyContents(message.Text)
+			case *linebot.ImageMessage:
+				replyContents = convertToLineFormat([]content{content{"text", "image detected"}})
+			}
 		}
 
 		// execute message-reply
