@@ -1,0 +1,52 @@
+LOG:  database system was interrupted; last known up at 2017-09-29 21:17:10 JST
+LOG:  database system was not properly shut down; automatic recovery in progress
+LOG:  invalid record length at 0/2556090: wanted 24, got 0
+LOG:  redo is not required
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "yusukeotawa" does not exist
+FATAL:  database "d" does not exist
+FATAL:  database "D" does not exist
+FATAL:  database "memoria" does not exist
+FATAL:  database "d" does not exist
+ERROR:  syntax error at or near "ls" at character 1
+STATEMENT:  ls
+	create users (id SERIAL, age int, name varchar(50))
+	;
+ERROR:  syntax error at or near "ls" at character 1
+STATEMENT:  ls
+	create users (id SERIAL, age int, name varchar(50));
+ERROR:  syntax error at or near "users" at character 8
+STATEMENT:  create users (id SERIAL, age int, name varchar(50));
+ERROR:  column "yotawa" does not exist at character 39
+STATEMENT:  insert into users(name, age) values  ("yotawa", 21);
+ERROR:  column "yotawa" does not exist at character 39
+STATEMENT:  insert into users (name, age) values ("yotawa", 21);
+ERROR:  syntax error at or near "'hey'" at character 20
+STATEMENT:  insert into users ('hey', 24)
+	;
+FATAL:  role "yotawa-with-go" does not exist
+FATAL:  role "yotawa-with-go" does not exist
+FATAL:  role "root" does not exist
+FATAL:  role "root" does not exist
+FATAL:  role "postgres" does not exist
+FATAL:  role "postgres" does not exist
+ERROR:  syntax error at or near "roll" at character 8
+STATEMENT:  create roll yotawa-with-go with superuser
+	select rolname from pg_roles;
+ERROR:  syntax error at or near "roll" at character 8
+STATEMENT:  create roll yotawa-with-go with superuser
+	select rolname from pg_roles;
+ERROR:  syntax error at or near "roll" at character 8
+STATEMENT:  create roll yotawa-with-go with superuser;
+ERROR:  syntax error at or near "-" at character 19
+STATEMENT:  create role yotawa-with-go with superuser;
+FATAL:  role "lineapp" is not permitted to log in
+FATAL:  role "lineapp" is not permitted to log in
+FATAL:  database "ytoawa-with-go" does not exist
+FATAL:  role "lineapp" is not permitted to log in
+FATAL:  role "lineapp" is not permitted to log in
+ERROR:  syntax error at or near "," at character 36
+STATEMENT:  create role postgres with superuser, login
+	;
