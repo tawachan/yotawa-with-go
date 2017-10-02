@@ -4,3 +4,4 @@ import:
   version: ^1.0.0
   subpackages:
   - linebot
+- package: gopkg.in/mgo.v2
