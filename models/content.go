@@ -83,5 +83,5 @@ func (c Content) getContents(s string) []Content {
 
 	fmt.Println(err)
 	fmt.Println(userid)
-
+	return []Content{}
 }
