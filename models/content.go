@@ -4,6 +4,7 @@ import "strings"
 
 type Content struct {
 	Category string
+	Key      string
 	Text     string
 	Image    string
 	Link     string
