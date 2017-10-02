@@ -33,7 +33,7 @@ func MakeMessageWithCarousel(c models.Content) linebot.Message {
 	title := c.Text
 	link := c.Link
 	desc := "Check this out!"
-	image := "https://68.media.tumblr.com/7433692cabbfa132f34adb034e7909fa/tumblr_inline_owu4b4v7ow1v9napg_500.png"
+	image := c.Image
 
 	action := linebot.NewURITemplateAction("View", link)
 	carousel := linebot.NewCarouselColumn(image, title, desc, action)
