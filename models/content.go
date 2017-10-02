@@ -3,10 +3,10 @@ package models
 import "strings"
 
 type Content struct {
-	Ctype  string
-	Ctext  string
-	Cimage string
-	Clink  string
+	Category string
+	Text     string
+	Image    string
+	Link     string
 }
 
 // Will be deleted when mongo db connected
@@ -26,25 +26,25 @@ func init() {
 
 func NewContentText(text string) Content {
 	return Content{
-		Ctype: "text",
-		Ctext: text,
+		Category: "text",
+		Text:     text,
 	}
 }
 
 func NewContentImage(text string, image string) Content {
 	return Content{
-		Ctype:  "image",
-		Ctext:  text,
-		Cimage: image,
+		Category: "image",
+		Text:     text,
+		Image:    image,
 	}
 }
 
 func NewContentLink(text string, image string, link string) Content {
 	return Content{
-		Ctype:  "link",
-		Ctext:  text,
-		Cimage: image,
-		Clink:  link,
+		Category: "link",
+		Text:     text,
+		Image:    image,
+		Link:     link,
 	}
 }
 
