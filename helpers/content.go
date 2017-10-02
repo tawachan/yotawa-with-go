@@ -32,7 +32,7 @@ func MakeMessageWithImage(c models.Content) linebot.Message {
 func MakeMessageWithCarousel(c models.Content) linebot.Message {
 	title := c.Text
 	link := c.Link
-	desc := "Check this out!"
+	desc := c.Link
 	image := c.Image
 
 	action := linebot.NewURITemplateAction("View", link)

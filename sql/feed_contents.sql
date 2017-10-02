@@ -3,4 +3,4 @@ INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('text', 'OTYM', 
 INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('text', 'おたやま', 'OTYMはどこからともなく生まれた俗称です。そんな名前の会社が有るとかないとか。',  '', '');
 INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('text', 'ヲタヤマ', 'OTYMはどこからともなく生まれた俗称です。そんな名前の会社が有るとかないとか。',  '', '');
 INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('text', 'オタヤマ', 'OTYMはどこからともなく生まれた俗称です。そんな名前の会社が有るとかないとか。',  '', '');
-INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('link', 'Tumblr', 'こちらも見てね(´・ω・｀)',  'https://68.media.tumblr.com/avatar_1a796a63c4f8_96.png', 'https://yotawa9929.tumblr.com/');
+INSERT INTO contents (Category, Key, Text, Image, Link) VALUES ('link', 'Tumblr', 'Y.otawa の Tumblr',  'https://68.media.tumblr.com/avatar_1a796a63c4f8_96.png', 'https://yotawa9929.tumblr.com/');
