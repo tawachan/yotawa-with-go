@@ -8,20 +8,19 @@ import (
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/yusuke9929/yotawa-with-go/helpers"
 	"github.com/yusuke9929/yotawa-with-go/models"
-	mgo "gopkg.in/mgo.v2"
 )
 
 // added session to our lineController
 type LineController struct {
-	session            *mgo.Session
+	session            string
 	channelSecret      string
 	channelAccessToken string
 }
 
 // added session to our lineController
-func NewLineController(s *mgo.Session) *LineController {
+func NewLineController(s string) *LineController {
 	return &LineController{
-		s,
+		"session",
 		os.Getenv("channelSecret"),
 		os.Getenv("channelAccessToken"),
 	}

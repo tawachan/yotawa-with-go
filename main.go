@@ -1,20 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
 
-	mgo "gopkg.in/mgo.v2"
+	"github.com/yusuke9929/yotawa-with-go/controllers"
 )
 
 func main() {
 
-	// lc := controllers.NewLineController(getSession())
-	test := getSession()
-	fmt.Println(test)
+	lc := controllers.NewLineController(getSession())
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -22,20 +19,13 @@ func main() {
 	}
 
 	http.HandleFunc("/", root)
-	// http.HandleFunc("/callback", lc.Callback)
+	http.HandleFunc("/callback", lc.Callback)
 
 	http.ListenAndServe(":"+port, nil)
 }
 
-func getSession() *mgo.Session {
-	// Connect to our local mongo
-	s, err := mgo.Dial("mongodb://localhost")
-
-	// Check if connection error, is mongo running?
-	if err != nil {
-		panic(err)
-	}
-	return s
+func getSession() string {
+	return "session"
 }
 
 //Route for Checking whether application is running
