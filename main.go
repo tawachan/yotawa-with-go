@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/lib/pq"
 	"github.com/yusuke9929/yotawa-with-go/controllers"
 )
 

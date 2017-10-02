@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"strings"
+
+	_ "github.com/lib/pq"
 )
 
 type Content struct {
+	Id       string
 	Category string
 	Key      string
 	Text     string
@@ -54,34 +56,40 @@ func NewContentLink(text string, image string, link string) Content {
 	}
 }
 
+// func GetAutoReplyContents(s string) []Content {
+// 	var contents []Content
+// 	for key, value := range dictionary {
+// 		if strings.Contains(s, key) {
+// 			contents = append(contents, NewContentText(value))
+// 		}
+// 	}
+// 	if len(contents) == 0 {
+// 		contents = append(contents, NewContentText(s))
+// 	}
+// 	return contents
+// }
+
 func GetAutoReplyContents(s string) []Content {
 	var contents []Content
-	for key, value := range dictionary {
-		if strings.Contains(s, key) {
-			contents = append(contents, NewContentText(value))
-		}
-	}
-	if len(contents) == 0 {
-		contents = append(contents, NewContentText(s))
-	}
-	return contents
-}
-
-func (c Content) getContents(s string) []Content {
 	db, err := sql.Open("postgres", "user=postgres dbname=yotawa-with-go")
 	if err != nil {
 		log.Fatal(err)
 		fmt.Println(err)
 	}
-
 	rows, err := db.Query("SELECT * FROM contents where key like $1", s)
-	fmt.Println(rows.Scan())
+	defer rows.Close()
 
-	var userid int
-	err = db.QueryRow(`INSERT INTO users(name, age)
-		VALUES('beatrice', 93) RETURNING id`).Scan(&userid)
+	for rows.Next() {
+		var c Content
+		if err := rows.Scan(c.Id, c.Category, c.Key, c.Text, c.Image, c.Link); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(c)
+		contents = append(contents, c)
+	}
 
-	fmt.Println(err)
-	fmt.Println(userid)
-	return []Content{}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+	return contents
 }
