@@ -1,6 +1,10 @@
-hash: d793b7b0dd382582255a9d6ce9a396bf83977aef666190548bf26d16164a9140
-updated: 2017-10-02T12:34:27.235473322+09:00
+hash: 8efeb99afdf7aa203bb1e29b74358a467f16c329814b9a55dfdeaac640073fd8
+updated: 2017-10-02T14:56:19.630705995+09:00
 imports:
+- name: github.com/lib/pq
+  version: b77235e3890a962fe8a6f8c4c7198679ca7814e7
+  subpackages:
+  - oid
 - name: github.com/line/line-bot-sdk-go
   version: 3a7d66f5efce6ac202f650134609f9d6d163a640
   subpackages:
@@ -12,9 +16,4 @@ imports:
   - context/ctxhttp
 - name: gopkg.in/mgo.v2
   version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
-  subpackages:
-  - bson
-  - internal/json
-  - internal/sasl
-  - internal/scram
 testImports: []
