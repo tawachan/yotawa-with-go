@@ -7,11 +7,11 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 	// Set up contents for line format
 	for _, c := range contents {
 		var lm linebot.Message
-		if c.Ctype == "text" {
+		if c.Category == "text" {
 			lm = MakeMessageWithText(c)
-		} else if c.Ctype == "image" {
+		} else if c.Category == "image" {
 			lm = MakeMessageWithImage(c)
-		} else if c.Ctype == "link" {
+		} else if c.Category == "link" {
 			lm = MakeMessageWithCarousel(c)
 		} else {
 			continue
@@ -22,16 +22,16 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 }
 
 func MakeMessageWithText(c models.Content) linebot.Message {
-	return linebot.NewTextMessage(c.Ctext)
+	return linebot.NewTextMessage(c.Text)
 }
 
 func MakeMessageWithImage(c models.Content) linebot.Message {
-	return linebot.NewImageMessage(c.Cimage, c.Cimage)
+	return linebot.NewImageMessage(c.Image, c.Image)
 }
 
 func MakeMessageWithCarousel(c models.Content) linebot.Message {
-	title := c.Ctext
-	link := c.Clink
+	title := c.Text
+	link := c.Link
 	desc := "Check this out!"
 	image := "https://68.media.tumblr.com/7433692cabbfa132f34adb034e7909fa/tumblr_inline_owu4b4v7ow1v9napg_500.png"
 
