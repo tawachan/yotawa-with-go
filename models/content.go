@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -71,7 +72,7 @@ func NewContentLink(text string, image string, link string) Content {
 
 func GetAutoReplyContents(s string) []Content {
 	var contents []Content
-	db, err := sql.Open("postgres", "user=postgres dbname=yotawa-with-go")
+	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err)
 		fmt.Println(err)
