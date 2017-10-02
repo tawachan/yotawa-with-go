@@ -82,7 +82,7 @@ func GetAutoReplyContents(s string) []Content {
 
 	for rows.Next() {
 		var c Content
-		if err := rows.Scan(c.Id, c.Category, c.Key, c.Text, c.Image, c.Link); err != nil {
+		if err := rows.Scan(&c.Id, &c.Category, &c.Key, &c.Text, &c.Image, &c.Link); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(c)
