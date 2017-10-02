@@ -61,8 +61,8 @@ func GetAutoReplyContents(s string) []Content {
 		contents = append(contents, c)
 	}
 
-	if contents.length == 0 {
-		contents = append(NewContentText(s))
+	if len(contents) == 0 {
+		contents = append(contents, NewContentText(s))
 	}
 
 	if err := rows.Err(); err != nil {
