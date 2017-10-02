@@ -39,5 +39,5 @@ func MakeMessageWithCarousel(c models.Content) linebot.Message {
 	carousel := linebot.NewCarouselColumn(image, title, desc, action)
 	template := linebot.NewCarouselTemplate(carousel)
 
-	return linebot.NewTemplateMessage("Check this out!", template)
+	return linebot.NewTemplateMessage(desc, template)
 }
