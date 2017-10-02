@@ -1,6 +1,11 @@
 package models
 
-import "strings"
+import (
+	"database/sql"
+	"fmt"
+	"log"
+	"strings"
+)
 
 type Content struct {
 	Category string
@@ -60,4 +65,23 @@ func GetAutoReplyContents(s string) []Content {
 		contents = append(contents, NewContentText(s))
 	}
 	return contents
+}
+
+func (c Content) getContents(s string) []Content {
+	db, err := sql.Open("postgres", "user=postgres dbname=yotawa-with-go")
+	if err != nil {
+		log.Fatal(err)
+		fmt.Println(err)
+	}
+
+	rows, err := db.Query("SELECT * FROM contents where key like $1", s)
+	fmt.Println(rows.Scan())
+
+	var userid int
+	err = db.QueryRow(`INSERT INTO users(name, age)
+		VALUES('beatrice', 93) RETURNING id`).Scan(&userid)
+
+	fmt.Println(err)
+	fmt.Println(userid)
+
 }
