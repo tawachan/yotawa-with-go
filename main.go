@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -12,6 +13,8 @@ import (
 func main() {
 
 	// lc := controllers.NewLineController(getSession())
+	test := getSession()
+	fmt.Println(test)
 
 	port := os.Getenv("PORT")
 	if port == "" {
