@@ -6,13 +6,12 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/yusuke9929/yotawa-with-go/controllers"
 	mgo "gopkg.in/mgo.v2"
 )
 
 func main() {
 
-	lc := controllers.NewLineController(getSession())
+	// lc := controllers.NewLineController(getSession())
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -20,7 +19,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", root)
-	http.HandleFunc("/callback", lc.Callback)
+	// http.HandleFunc("/callback", lc.Callback)
 
 	http.ListenAndServe(":"+port, nil)
 }
