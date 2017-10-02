@@ -7,6 +7,7 @@ import (
 	"os"
 
 	_ "github.com/lib/pq"
+	"github.com/yusuke9929/yotawa-with-go/models"
 )
 
 type Content struct {
@@ -59,6 +60,10 @@ func GetAutoReplyContents(s string) []Content {
 		}
 		fmt.Println(c)
 		contents = append(contents, c)
+	}
+
+	if contents.length == 0 {
+		contents = append(models.NewContentText(s))
 	}
 
 	if err := rows.Err(); err != nil {
