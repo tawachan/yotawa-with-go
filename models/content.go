@@ -49,7 +49,7 @@ func GetAutoReplyContents(s string) []Content {
 		log.Fatal(err)
 		fmt.Println(err)
 	}
-	rows, err := db.Query(`SELECT * FROM contents WHERE key LIKE '%' || $1 || '%'`, string(rune('%'))+s+string(rune('%')))
+	rows, err := db.Query("SELECT * FROM contents WHERE key LIKE '%" + s + "%'")
 	defer rows.Close()
 
 	for rows.Next() {
