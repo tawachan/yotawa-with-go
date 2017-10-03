@@ -7,6 +7,7 @@ import (
 
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/yusuke9929/yotawa-with-go/helpers"
+	"github.com/yusuke9929/yotawa-with-go/logs"
 	"github.com/yusuke9929/yotawa-with-go/models"
 )
 
@@ -29,10 +30,10 @@ func NewLineController(s string) *LineController {
 func (lc LineController) Callback(w http.ResponseWriter, req *http.Request) {
 
 	bot, err := linebot.New(lc.channelSecret, lc.channelAccessToken)
-	helpers.CheckError(err)
+	logs.CheckError(err)
 
 	events, err := bot.ParseRequest(req)
-	helpers.CheckError(err)
+	logs.CheckError(err)
 
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
