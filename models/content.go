@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	_ "github.com/lib/pq"
+	"github.com/yusuke9929/yotawa-with-go/logs"
 )
 
 type Content struct {
@@ -45,11 +47,9 @@ func NewContentLink(text string, image string, link string) Content {
 func GetAutoReplyContents(s string) []Content {
 	var contents []Content
 	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
-	if err != nil {
-		log.Fatal(err)
-		fmt.Println(err)
-	}
-	rows, err := db.Query("SELECT * FROM contents WHERE key LIKE '%" + s + "%'")
+	logs.CheckError(err)
+
+	rows, err := db.Query("SELECT * FROM contents")
 	defer rows.Close()
 
 	for rows.Next() {
@@ -58,7 +58,9 @@ func GetAutoReplyContents(s string) []Content {
 			log.Fatal(err)
 		}
 		fmt.Println(c)
-		contents = append(contents, c)
+		if strings.Contains(s, c.Key) {
+			contents = append(contents, c)
+		}
 	}
 
 	if len(contents) == 0 {
