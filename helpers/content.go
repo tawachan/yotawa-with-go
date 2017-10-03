@@ -5,6 +5,7 @@ import "github.com/yusuke9929/yotawa-with-go/models"
 
 func ConvertContentsToMessages(contents []models.Content) (messagesToReply []linebot.Message) {
 	// Set up contents for line format
+	var carouselContents []models.Content
 	for _, c := range contents {
 		var lm linebot.Message
 		if c.Category == "text" {
@@ -13,11 +14,16 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 			lm = MakeMessageWithImage(c)
 		} else if c.Category == "link" {
 			lm = MakeMessageWithCarousel(c)
+		} else if c.Category == "sns" {
+			carouselContents = append(carouselContents, c)
 		} else {
 			continue
 		}
 		messagesToReply = append(messagesToReply, lm)
 	}
+	//Multi-Carousel
+	messagesToReply = append(messagesToReply, MakeMessagesWithCarousel(carouselContents)...)
+
 	return messagesToReply
 }
 
@@ -40,4 +46,12 @@ func MakeMessageWithCarousel(c models.Content) linebot.Message {
 	template := linebot.NewCarouselTemplate(carousel)
 
 	return linebot.NewTemplateMessage(title, template)
+}
+
+func MakeMessagesWithCarousel(contents []models.Content) []linebot.Message {
+	var messagesToReply []linebot.Message
+	for _, content := range contents {
+		messagesToReply = append(messagesToReply, MakeMessageWithCarousel(content))
+	}
+	return messagesToReply
 }
