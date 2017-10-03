@@ -49,6 +49,7 @@ func GetAutoReplyContents(s string) []Content {
 		log.Fatal(err)
 		fmt.Println(err)
 	}
+	fmt.Printf("SELECT * FROM contents where key like $1", string(rune('%'))+s+string(rune('%')))
 	rows, err := db.Query("SELECT * FROM contents where key like $1", string(rune('%'))+s+string(rune('%')))
 	defer rows.Close()
 
