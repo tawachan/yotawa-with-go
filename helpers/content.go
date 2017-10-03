@@ -16,6 +16,8 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 			lm = MakeMessageWithCarousel(c)
 		} else if c.Category == "sns" {
 			carouselContents = append(carouselContents, c)
+			// -> go to next loop b/c no linebot message to append
+			continue
 		} else {
 			continue
 		}
