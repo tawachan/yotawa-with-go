@@ -24,7 +24,7 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 		messagesToReply = append(messagesToReply, lm)
 	}
 	//Multi-Carousel
-	messagesToReply = append(messagesToReply, MakeMessagesWithCarousel(carouselContents)...)
+	messagesToReply = append(messagesToReply, MakeMessageWithCarousels(carouselContents))
 
 	return messagesToReply
 }
@@ -50,10 +50,17 @@ func MakeMessageWithCarousel(c models.Content) linebot.Message {
 	return linebot.NewTemplateMessage(title, template)
 }
 
-func MakeMessagesWithCarousel(contents []models.Content) []linebot.Message {
-	var messagesToReply []linebot.Message
-	for _, content := range contents {
-		messagesToReply = append(messagesToReply, MakeMessageWithCarousel(content))
+func MakeMessageWithCarousels(contents []models.Content) linebot.Message {
+	var carousels []*linebot.CarouselColumn
+	for _, c := range contents {
+		title := c.Text
+		link := c.Link
+		desc := c.Link
+		image := c.Image
+
+		action := linebot.NewURITemplateAction("View", link)
+		carousels = append(carousels, linebot.NewCarouselColumn(image, title, desc, action))
 	}
-	return messagesToReply
+	template := linebot.NewCarouselTemplate(carousels...)
+	return linebot.NewTemplateMessage(contents[0].Text, template)
 }
