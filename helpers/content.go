@@ -24,8 +24,9 @@ func ConvertContentsToMessages(contents []models.Content) (messagesToReply []lin
 		messagesToReply = append(messagesToReply, lm)
 	}
 	//Multi-Carousel
-	messagesToReply = append(messagesToReply, MakeMessageWithCarousels(carouselContents))
-
+	if len(carouselContents) > 0 {
+		messagesToReply = append(messagesToReply, MakeMessageWithCarousels(carouselContents))
+	}
 	return messagesToReply
 }
 
