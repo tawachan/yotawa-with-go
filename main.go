@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	lc := controllers.NewLineController(getSession())
+	lc := controllers.NewLineController()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -21,10 +21,6 @@ func main() {
 	http.HandleFunc("/callback", lc.Callback)
 
 	http.ListenAndServe(":"+port, nil)
-}
-
-func getSession() string {
-	return "session"
 }
 
 //Route for Checking whether application is running

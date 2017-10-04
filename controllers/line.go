@@ -13,15 +13,13 @@ import (
 
 // added session to our lineController
 type LineController struct {
-	session            string
 	channelSecret      string
 	channelAccessToken string
 }
 
 // added session to our lineController
-func NewLineController(s string) *LineController {
+func NewLineController() *LineController {
 	return &LineController{
-		"session",
 		os.Getenv("channelSecret"),
 		os.Getenv("channelAccessToken"),
 	}
