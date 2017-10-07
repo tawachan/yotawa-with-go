@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/yusuke9929/yotawa-with-go/controllers"
+	"github.com/yotawa9929/yotawa-with-go/controllers"
 )
 
 func main() {

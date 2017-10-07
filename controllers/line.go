@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/line/line-bot-sdk-go/linebot"
-	"github.com/yusuke9929/yotawa-with-go/helpers"
-	"github.com/yusuke9929/yotawa-with-go/logs"
-	"github.com/yusuke9929/yotawa-with-go/models"
+	"github.com/yotawa9929/yotawa-with-go/helpers"
+	"github.com/yotawa9929/yotawa-with-go/logs"
+	"github.com/yotawa9929/yotawa-with-go/models"
 )
 
 // added session to our lineController

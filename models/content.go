@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	_ "github.com/lib/pq"
-	"github.com/yusuke9929/yotawa-with-go/logs"
+	"github.com/yotawa9929/yotawa-with-go/logs"
 )
 
 type Content struct {

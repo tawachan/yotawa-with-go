@@ -1,7 +1,9 @@
 package helpers
 
-import "github.com/line/line-bot-sdk-go/linebot"
-import "github.com/yusuke9929/yotawa-with-go/models"
+import (
+	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/yotawa9929/yotawa-with-go/models"
+)
 
 func ConvertContentsToMessages(contents []models.Content) (messagesToReply []linebot.Message) {
 	// Set up contents for line format
