@@ -1,4 +1,4 @@
-package: github.com/yusuke9929/yotawa-with-go
+package: github.com/yotawa9929/yotawa-with-go
 import:
 - package: github.com/line/line-bot-sdk-go
   version: ^1.0.0
